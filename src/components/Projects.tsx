@@ -53,7 +53,7 @@ export function Projects() {
       id: 5,
       title: "Prime Burger Restaurante - Página Web",
       problem: "Página web para un local de hamburguesas, desarrollada con el objetivo de proporcionar una experiencia de usuario moderna y funcional.",
-      technologies: ["HTML", "SQL", "JavaScript", "Rollup", "Less", "Git"],
+      technologies: ["HTML", "CSS", "JavaScript", "Rollup", "Less", "Git"],
       image: "https://images.unsplash.com/photo-1633412802994-5c058f151b66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhYmFzZSUyMGFyY2hpdGVjdHVyZSUyMHN5c3RlbXxlbnwxfHx8fDE3NzI1Mjc1NDl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
       demoUrl: "https://valensoto486.github.io/TallerPlataformas/",
       codeUrl: "https://github.com/valensoto486/TallerPlataformas/tree/prueba"
@@ -75,6 +75,15 @@ export function Projects() {
       image: "https://images.unsplash.com/photo-1718630732291-3bc8de36b030?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbG91ZCUyMGNvbXB1dGluZyUyMGF3cyUyMGluZnJhc3RydWN0dXJlfGVufDF8fHx8MTc3MjUyNzU0OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
       demoUrl: "#",
       codeUrl: "https://github.com/marianaUrrego/app_hibrida"
+    },
+    {
+      id: 8,
+      title: "Landing Page — Concurso de fotografía",
+      problem: "Página web para un concurso de fotografía.",
+      technologies: ["HTML", "CSS", "JavaScript", "Git"],
+      image: "https://images.unsplash.com/photo-1718630732291-3bc8de36b030?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbG91ZCUyMGNvbXB1dGluZyUyMGF3cyUyMGluZnJhc3RydWN0dXJlfGVufDF8fHx8MTc3MjUyNzU0OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      demoUrl: "https://samueluribe27.github.io/Taller1plataformas/",
+      codeUrl: "https://github.com/samueluribe27/Taller1plataformas/tree/version-final"
     },
   ];
 

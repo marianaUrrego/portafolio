@@ -1,0 +1,217 @@
+@use "../abstracts/functions" as f;
+@use "../abstracts/mixins" as m;
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  padding: 5rem 1rem; // 80px
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: f.c(bg);
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  &__orb {
+    position: absolute;
+    width: 24rem;  // 384px
+    height: 24rem;
+    border-radius: 9999px;
+    filter: blur(120px);
+
+    &--one {
+      top: 25%;
+      left: 25%;
+      background: f.c(secondary);
+    }
+
+    &--two {
+      bottom: 25%;
+      right: 25%;
+      background: f.c(muted);
+    }
+  }
+
+  &__container {
+    position: relative;
+    width: 100%;
+    max-width: 72rem; // ~1152px
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  &__content {
+    text-align: center;
+  }
+
+  /* Placeholder para botones (extend) */
+  %btn-base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border-radius: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 200ms ease, background-color 200ms ease, box-shadow 200ms ease, border-color 200ms ease, color 200ms ease;
+    will-change: transform;
+
+    &:hover {
+      transform: translateY(-1px) scale(1.03);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    &:focus-visible {
+      outline: 2px solid f.c(hover);
+      outline-offset: 3px;
+    }
+  }
+
+  &__name {
+    margin: 0 0 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+
+    /* Escala responsive */
+    font-size: clamp(2.75rem, 6vw, 5rem);
+
+    /* Gradiente texto */
+    background: linear-gradient(90deg, f.c(hover), f.c(primary), f.c(highlight));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &__role {
+    margin-bottom: 2rem;
+  }
+
+  &__roleTitle {
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: f.c(highlight);
+  }
+
+  &__roleSubtitle {
+    margin: 0;
+    font-weight: 500;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: f.c(hover);
+  }
+
+  &__description {
+    margin: 0 auto 3rem;
+    max-width: 48rem;
+    line-height: 1.6;
+    font-weight: 400;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+
+    @include m.respond(sm) {
+      flex-direction: row;
+    }
+  }
+
+  &__btn {
+    @extend %btn-base;
+  }
+
+  &__btn--primary {
+    background: f.c(primary);
+    color: f.c(white);
+    box-shadow: 0 12px 28px rgba(157, 78, 221, 0.35);
+
+    &:hover {
+      background: f.c(hover);
+      box-shadow: 0 14px 34px rgba(157, 78, 221, 0.45);
+    }
+
+    .hero__btnIcon {
+      transition: transform 200ms ease;
+    }
+
+    &:hover .hero__btnIcon {
+      transform: translateX(4px);
+    }
+  }
+
+  &__btn--secondary {
+    background: f.c(secondary);
+    color: f.c(white);
+    border: 1px solid rgba(157, 78, 221, 0.45);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+
+    &:hover {
+      background: f.c(primary);
+      border-color: rgba(199, 125, 255, 0.7);
+    }
+  }
+
+  &__btnIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  &__social {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  &__socialLink {
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.75rem;
+    background: f.c(card);
+    color: f.c(highlight);
+    text-decoration: none;
+    transition: transform 200ms ease, background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+
+    &:hover {
+      background: f.c(muted);
+      color: f.c(white);
+      transform: translateY(-1px) scale(1.08);
+      box-shadow: 0 14px 28px rgba(157, 78, 221, 0.25);
+    }
+
+    &:focus-visible {
+      outline: 2px solid f.c(hover);
+      outline-offset: 3px;
+    }
+  }
+
+  &__socialIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+/* Reduce motion*/
+@media (prefers-reduced-motion: reduce) {
+  .hero,
+  .hero * {
+    transition: none !important;
+  }
+}

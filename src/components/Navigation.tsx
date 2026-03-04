@@ -1,124 +1,94 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
+type NavItem = { label: string; href: string };
+
+const NAV_ITEMS: NavItem[] = [
+  { label: "Inicio", href: "#hero" },
+  { label: "Sobre mí", href: "#about" },
+  { label: "Stack", href: "#tech" },
+  { label: "Proyectos", href: "#projects" },
+  { label: "Formación", href: "#education" },
+  { label: "Contacto", href: "#contact" },
+];
+
 export function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
+  // Cierra el menú móvil si el usuario cambia a desktop
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    const onResize = () => {
+      if (window.innerWidth >= 768) setIsOpen(false);
     };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const navItems = [
-    { label: "Sobre mí", href: "#about" },
-    { label: "Stack", href: "#stack" },
-    { label: "Proyectos", href: "#projects" },
-    { label: "Formación", href: "#education" },
-    { label: "Contacto", href: "#contact" }
-  ];
+  // Opcional: bloquear scroll cuando el menú está abierto
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setIsMobileMenuOpen(false);
-  };
+  const handleNavClick = () => setIsOpen(false);
 
   return (
-    <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-[#10002B]/95 backdrop-blur-md shadow-lg border-b border-[#5A189A]/30"
-            : "bg-transparent"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo/Name */}
-            <button
-              onClick={scrollToTop}
-              className="text-xl md:text-2xl text-[#E0AAFF] hover:text-[#C77DFF] transition-colors cursor-pointer"
-              style={{ fontWeight: 700 }}
-            >
-              MG
-            </button>
+    <header className="nav" role="banner">
+      <div className="nav__container">
+        <a className="nav__brand" href="#hero" onClick={handleNavClick}>
+          <span className="nav__brandMark" aria-hidden="true" />
+          <span className="nav__brandText">Mariana</span>
+        </a>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="text-gray-300 hover:text-[#C77DFF] transition-colors"
-                  style={{ fontWeight: 500 }}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
+        {/* Desktop */}
+        <nav className="nav__links" aria-label="Navegación principal">
+          {NAV_ITEMS.map((item) => (
+            <a key={item.href} href={item.href} className="nav__link">
+              {item.label}
+            </a>
+          ))}
+        </nav>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-[#E0AAFF] hover:text-[#C77DFF] transition-colors"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-      </motion.nav>
+        <div className="nav__actions">
+          <a className="nav__cta" href="#contact" onClick={handleNavClick}>
+            Contactar
+          </a>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-y-0 right-0 z-40 w-64 bg-[#240046] shadow-2xl md:hidden"
+          {/* Mobile toggle */}
+          <button
+            type="button"
+            className="nav__toggle"
+            aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setIsOpen((v) => !v)}
           >
-            <div className="flex flex-col gap-2 p-8 pt-20">
-              {navItems.map((item, index) => (
-                <motion.a
-                  key={item.href}
-                  href={item.href}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-gray-300 hover:text-[#C77DFF] transition-colors py-3 px-4 rounded-lg hover:bg-[#3C096C]"
-                  style={{ fontWeight: 500 }}
-                >
-                  {item.label}
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            {isOpen ? <X className="nav__toggleIcon" /> : <Menu className="nav__toggleIcon" />}
+          </button>
+        </div>
+      </div>
 
-      {/* Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="fixed inset-0 bg-black/50 z-30 md:hidden"
-          />
-        )}
-      </AnimatePresence>
-    </>
+      {/* Mobile menu */}
+      <div
+        id="mobile-menu"
+        className={`nav__mobile ${isOpen ? "nav__mobile--open" : ""}`}
+        aria-hidden={!isOpen}
+      >
+        <nav className="nav__mobilePanel" aria-label="Menú móvil">
+          {NAV_ITEMS.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="nav__mobileLink"
+              onClick={handleNavClick}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
   );
 }
