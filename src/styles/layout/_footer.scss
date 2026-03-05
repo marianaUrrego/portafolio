@@ -1,0 +1,81 @@
+@use "../abstracts/functions" as f;
+@use "../abstracts/mixins" as m;
+
+.footer {
+  padding: 3rem 1rem;
+  border-top: 1px solid rgba(f.c(secondary), 0.3);
+  background: transparent;
+
+  &__container {
+    @include m.container;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  &__social {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  &__socialLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.75rem;
+    border-radius: f.r(md);
+
+    background: f.c(card);
+    color: f.c(highlight);
+
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+
+    @include m.focus-ring;
+
+    &:hover {
+      background: f.c(secondary);
+      color: f.c(white);
+      transform: scale(1.1);
+    }
+  }
+
+  &__socialIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: block;
+  }
+
+  &__copyrightText {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(f.c(white), 0.7);
+  }
+
+  &__heart {
+    width: 1rem;
+    height: 1rem;
+    display: block;
+
+    color: f.c(primary);
+    fill: currentColor;
+  }
+
+  &__metaText {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: rgba(f.c(white), 0.55);
+  }
+}

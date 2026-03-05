@@ -1,0 +1,18 @@
+@use "sass:map";
+@use "tokens" as t;
+
+@function c($key) {
+  @return map.get(t.$colors, $key);
+}
+
+@function font($key) {
+  @return map.get(t.$fonts, $key);
+}
+
+@function space($key) {
+  @return map.get(t.$spacing, $key);
+}
+
+@function r($key) {
+  @return map.get(t.$radius, $key);
+}

@@ -1,2 +1,25 @@
-@use "./sections/hero";
+/* 1) Abstracts (tokens, functions, mixins) */
+@use "./abstracts/tokens";
+@use "./abstracts/functions";
+@use "./abstracts/mixins";
+
+/* 2) Base */
+@use "./base/fonts";
+@use "./base/reset";
+@use "./base/global";
+
+/* 3) Layout */
+@use "./layout/app";
 @use "./layout/navigation";
+@use "./layout/footer";
+
+/* 4) Utilities */
+@use "./utilities/animations";
+@use "./utilities/effects";
+
+/* 5) Sections */
+@use "./sections/hero";
+@use "./sections/about";
+@use "./sections/tech-stack";
+@use "./sections/projects";
+@use "./sections/education";

@@ -1,84 +1,104 @@
 import { motion } from "motion/react";
-import { Server, Database, Code2, FileCode, Boxes, GitBranch, Github, Container,Layers } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import {
+  Server,
+  Database,
+  Code2,
+  FileCode,
+  Boxes,
+  GitBranch,
+  Github,
+  Container,
+  Layers,
+} from "lucide-react";
+
+type TechItem = {
+  name: string;
+  Icon: LucideIcon;
+  iconSize?: "lg" | "md";
+};
 
 export function TechStack() {
-  const backendTechs = [
-    { name: "Python", icon: <Code2 className="w-8 h-8" /> },
-    { name: "REST APIs", icon: <Server className="w-8 h-8" /> },
-    { name: "Laravel", icon: <Boxes className="w-8 h-8" /> },
-    { name: "PostgreSQL", icon: <Database className="w-8 h-8" /> },
-    { name: "MySQL", icon: <Database className="w-8 h-8" /> },
-    { name: "MongoDB", icon: <Database className="w-8 h-8" /> }
+  const backendTechs: TechItem[] = [
+    { name: "Python", Icon: Code2, iconSize: "lg" },
+    { name: "REST APIs", Icon: Server, iconSize: "lg" },
+    { name: "Laravel", Icon: Boxes, iconSize: "lg" },
+    { name: "PostgreSQL", Icon: Database, iconSize: "lg" },
+    { name: "MySQL", Icon: Database, iconSize: "lg" },
+    { name: "MongoDB", Icon: Database, iconSize: "lg" },
   ];
 
-  const frontendTechs = [
-    { name: "React", icon: <Code2 className="w-7 h-7" /> },
-    { name: "TypeScript", icon: <FileCode className="w-7 h-7" /> },
-    { name: "JavaScript", icon: <FileCode className="w-7 h-7" /> },
-    { name: "Sass", icon: <Layers className="w-7 h-7" /> }
+  const frontendTechs: TechItem[] = [
+    { name: "React", Icon: Code2 },
+    { name: "TypeScript", Icon: FileCode },
+    { name: "JavaScript", Icon: FileCode },
+    { name: "Sass", Icon: Layers },
   ];
 
-  const tools = [
-    { name: "Git", icon: <GitBranch className="w-7 h-7" /> },
-    { name: "GitHub", icon: <Github className="w-7 h-7" /> },
-    { name: "Docker", icon: <Container className="w-7 h-7" /> },
-    { name: "Laragon", icon: <Server className="w-7 h-7" /> }
+  const tools: TechItem[] = [
+    { name: "Git", Icon: GitBranch },
+    { name: "GitHub", Icon: Github },
+    { name: "Docker", Icon: Container },
+    { name: "Laragon", Icon: Server },
   ];
 
   return (
-    <section id="stack" className="py-20 px-4 relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 right-1/3 w-96 h-96 bg-[#5A189A] rounded-full blur-[100px]" />
+    <section id="stack" className="tech-stack">
+      {/* Background blob */}
+      <div className="tech-stack__bg" aria-hidden="true">
+        <div className="tech-stack__blob" />
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="tech-stack__container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="tech-stack__header"
         >
-          <h2 className="text-4xl md:text-5xl mb-4 text-[#E0AAFF]" style={{ fontWeight: 600 }}>
-            Stack Tecnológico
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-[#9D4EDD] to-[#C77DFF] mx-auto rounded-full" />
+          <h2 className="tech-stack__title">Stack Tecnológico</h2>
+          <div className="tech-stack__divider" />
         </motion.div>
 
-        {/* Backend - Principal */}
+        {/* Backend */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-16"
+          className="tech-stack__group tech-stack__group--backend"
         >
-          <div className="text-center mb-10">
-            <h3 className="text-3xl md:text-4xl text-white mb-3" style={{ fontWeight: 600 }}>
-              Backend
-            </h3>
-            <p className="text-[#C77DFF]" style={{ fontWeight: 500 }}>Enfoque Principal</p>
+          <div className="tech-stack__groupHeader">
+            <h3 className="tech-stack__groupTitle">Backend</h3>
+            <p className="tech-stack__groupSubtitle tech-stack__groupSubtitle--strong">
+              Enfoque Principal
+            </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="tech-stack__grid tech-stack__grid--backend">
             {backendTechs.map((tech, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
+                key={tech.name}
+                initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="group"
+                transition={{ delay: index * 0.08, duration: 0.5 }}
+                className="tech-stack__item"
               >
-                <div className="bg-gradient-to-br from-[#3C096C] to-[#5A189A] p-8 rounded-2xl border border-[#9D4EDD]/30 hover:border-[#C77DFF] transition-all duration-300 hover:shadow-2xl hover:shadow-[#9D4EDD]/30 transform hover:scale-105">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="p-4 bg-[#7B2CBF] rounded-xl mb-4 text-[#E0AAFF] group-hover:bg-[#9D4EDD] transition-colors">
-                      {tech.icon}
+                <div className="tech-stack__card tech-stack__card--primary">
+                  <div className="tech-stack__cardBody">
+                    <div className="tech-stack__iconWrap tech-stack__iconWrap--primary">
+                      <tech.Icon
+                        className={
+                          tech.iconSize === "lg"
+                            ? "tech-stack__icon tech-stack__icon--lg"
+                            : "tech-stack__icon"
+                        }
+                        aria-hidden="true"
+                      />
                     </div>
-                    <h4 className="text-xl text-white" style={{ fontWeight: 600 }}>
-                      {tech.name}
-                    </h4>
+                    <h4 className="tech-stack__name">{tech.name}</h4>
                   </div>
                 </div>
               </motion.div>
@@ -86,37 +106,35 @@ export function TechStack() {
           </div>
         </motion.div>
 
-        {/* Frontend - Secundario */}
+        {/* Frontend */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-12"
+          className="tech-stack__group"
         >
-          <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl text-white mb-2" style={{ fontWeight: 600 }}>
+          <div className="tech-stack__groupHeader">
+            <h3 className="tech-stack__groupTitle tech-stack__groupTitle--sm">
               Frontend
             </h3>
-            <p className="text-[#9D4EDD]" style={{ fontWeight: 400 }}>Complementario</p>
+            <p className="tech-stack__groupSubtitle">Complementario</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="tech-stack__grid tech-stack__grid--compact">
             {frontendTechs.map((tech, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
+                key={tech.name}
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="bg-[#3C096C] p-6 rounded-xl border border-[#7B2CBF]/50 hover:border-[#9D4EDD] transition-all duration-300 text-center hover:shadow-lg hover:shadow-[#7B2CBF]/20 transform hover:scale-105"
+                transition={{ delay: index * 0.08, duration: 0.5 }}
+                className="tech-stack__card tech-stack__card--compact"
               >
-                <div className="flex justify-center mb-3 text-[#C77DFF]">
-                  {tech.icon}
+                <div className="tech-stack__compactIcon">
+                  <tech.Icon className="tech-stack__icon" aria-hidden="true" />
                 </div>
-                <p className="text-white" style={{ fontWeight: 500 }}>
-                  {tech.name}
-                </p>
+                <p className="tech-stack__compactName">{tech.name}</p>
               </motion.div>
             ))}
           </div>
@@ -128,29 +146,28 @@ export function TechStack() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
+          className="tech-stack__group"
         >
-          <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl text-white mb-2" style={{ fontWeight: 600 }}>
+          <div className="tech-stack__groupHeader">
+            <h3 className="tech-stack__groupTitle tech-stack__groupTitle--sm">
               Herramientas
             </h3>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          <div className="tech-stack__grid tech-stack__grid--compact tech-stack__grid--tools">
             {tools.map((tool, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
+                key={tool.name}
+                initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="bg-[#3C096C] p-6 rounded-xl border border-[#7B2CBF]/50 hover:border-[#9D4EDD] transition-all duration-300 text-center hover:shadow-lg hover:shadow-[#7B2CBF]/20 transform hover:scale-105"
+                transition={{ delay: index * 0.08, duration: 0.5 }}
+                className="tech-stack__card tech-stack__card--compact"
               >
-                <div className="flex justify-center mb-3 text-[#C77DFF]">
-                  {tool.icon}
+                <div className="tech-stack__compactIcon">
+                  <tool.Icon className="tech-stack__icon" aria-hidden="true" />
                 </div>
-                <p className="text-white" style={{ fontWeight: 500 }}>
-                  {tool.name}
-                </p>
+                <p className="tech-stack__compactName">{tool.name}</p>
               </motion.div>
             ))}
           </div>

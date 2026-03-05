@@ -1,0 +1,212 @@
+@use "../abstracts/functions" as f;
+@use "../abstracts/mixins" as m;
+
+.education {
+  position: relative;
+  padding: 5rem 1rem;
+  overflow: hidden;
+  background: f.c(section);
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  &__blob {
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 24rem;
+    height: 24rem;
+    border-radius: f.r(full);
+    background: f.c(secondary);
+    filter: blur(100px);
+  }
+
+  &__container {
+    @include m.container;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  &__title {
+    margin: 0 0 1rem;
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: f.c(highlight);
+
+    @include m.respond(md) {
+      font-size: 3rem;
+    }
+  }
+
+  &__divider {
+    width: 5rem;
+    height: 0.25rem;
+    margin: 0 auto;
+    border-radius: f.r(full);
+    background: linear-gradient(90deg, f.c(primary), f.c(hover));
+  }
+
+  &__content {
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+
+  &__card {
+    padding: 2rem;
+    border-radius: f.r(lg);
+    border: 1px solid rgba(f.c(primary), 0.3);
+    background: linear-gradient(135deg, f.c(card), f.c(secondary));
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+
+    @include m.respond(md) {
+      padding: 2.5rem;
+    }
+
+    &:hover {
+      border-color: f.c(hover);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+      transform: translateY(-2px);
+    }
+
+    &:hover .education__iconWrap {
+      background: f.c(primary);
+    }
+  }
+
+  &__cardGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include m.respond(md) {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+  }
+
+  &__iconCol {
+    flex: 0 0 auto;
+  }
+
+  &__iconWrap {
+    width: 4rem;
+    height: 4rem;
+    border-radius: f.r(md);
+    background: f.c(muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: f.c(highlight);
+    transition: background 0.3s ease;
+  }
+
+  &__icon {
+    width: 2rem;
+    height: 2rem;
+    display: block;
+  }
+
+  &__body {
+    flex: 1 1 auto;
+  }
+
+  &__degree {
+    margin: 0 0 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: f.c(white);
+
+    @include m.respond(md) {
+      font-size: 1.875rem;
+    }
+  }
+
+  &__meta {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__metaRow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: f.c(hover);
+  }
+
+  &__metaIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex: 0 0 auto;
+    display: block;
+  }
+
+  &__metaText {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  &__specialties {
+    padding: 1.5rem;
+    border-radius: f.r(md);
+    border: 1px solid rgba(f.c(muted), 0.3);
+    background: rgba(f.c(section), 0.5);
+  }
+
+  &__specialtiesTitle {
+    margin: 0 0 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: f.c(highlight);
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+    color: rgba(f.c(white), 0.75);
+  }
+
+  &__listItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  &__bullet {
+    color: f.c(primary);
+    margin-top: 0.125rem;
+  }
+
+  &__note {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  &__noteText {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: rgba(f.c(white), 0.75);
+    line-height: 1.7;
+  }
+
+  &__noteHighlight {
+    font-weight: 600;
+    color: f.c(hover);
+  }
+}

@@ -1,0 +1,222 @@
+@use "../abstracts/functions" as f;
+@use "../abstracts/mixins" as m;
+
+.tech-stack {
+  position: relative;
+  padding: 5rem 1rem;
+  overflow: hidden;
+  background: f.c(section);
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  &__blob {
+    position: absolute;
+    top: 0;
+    right: 33%;
+    width: 24rem;
+    height: 24rem;
+    border-radius: f.r(full);
+    background: f.c(secondary);
+    filter: blur(100px);
+  }
+
+  &__container {
+    @include m.container;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  &__title {
+    margin: 0 0 1rem;
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: f.c(highlight);
+
+    @include m.respond(md) {
+      font-size: 3rem;
+    }
+  }
+
+  &__divider {
+    width: 5rem;
+    height: 0.25rem;
+    margin: 0 auto;
+    border-radius: f.r(full);
+    background: linear-gradient(90deg, f.c(primary), f.c(hover));
+  }
+
+  &__group {
+    margin-bottom: 3rem;
+
+    &--backend {
+      margin-bottom: 4rem;
+    }
+  }
+
+  &__groupHeader {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__groupTitle {
+    margin: 0 0 0.5rem;
+    font-size: 1.875rem;
+    font-weight: 600;
+    color: f.c(white);
+
+    @include m.respond(md) {
+      font-size: 2.25rem;
+    }
+
+    &--sm {
+      font-size: 1.5rem;
+
+      @include m.respond(md) {
+        font-size: 1.875rem;
+      }
+    }
+  }
+
+  &__groupSubtitle {
+    margin: 0;
+    font-weight: 400;
+    color: f.c(primary);
+
+    &--strong {
+      font-weight: 500;
+      color: f.c(hover);
+    }
+  }
+
+  &__grid {
+    display: grid;
+    gap: 1rem;
+
+    &--backend {
+      grid-template-columns: 1fr;
+
+      @include m.respond(sm) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include m.respond(lg) {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    &--compact {
+      grid-template-columns: repeat(2, 1fr);
+
+      @include m.respond(md) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    &--tools {
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+  }
+
+  &__item {
+    // wrapper para animación
+  }
+
+  &__card {
+    border-radius: f.r(lg);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+
+    &--primary {
+      border: 1px solid rgba(f.c(primary), 0.3);
+      background: linear-gradient(135deg, f.c(card), f.c(secondary));
+
+      &:hover {
+        border-color: f.c(hover);
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+        transform: scale(1.03);
+      }
+
+      &:hover .tech-stack__iconWrap--primary {
+        background: f.c(primary);
+      }
+    }
+
+    &--compact {
+      padding: 1.5rem;
+      border-radius: f.r(md);
+      border: 1px solid rgba(f.c(muted), 0.5);
+      background: f.c(card);
+      text-align: center;
+
+      &:hover {
+        border-color: f.c(primary);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+        transform: scale(1.03);
+      }
+    }
+  }
+
+  &__cardBody {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  &__iconWrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: f.r(md);
+
+    &--primary {
+      padding: 1rem;
+      background: f.c(muted);
+      color: f.c(highlight);
+      transition: background 0.3s ease;
+    }
+  }
+
+  &__icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    display: block;
+
+    &--lg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  &__name {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: f.c(white);
+  }
+
+  &__compactIcon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+    color: f.c(hover);
+  }
+
+  &__compactName {
+    margin: 0;
+    font-weight: 500;
+    color: f.c(white);
+  }
+}

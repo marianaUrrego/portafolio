@@ -1,94 +1,109 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
 
-type NavItem = { label: string; href: string };
-
-const NAV_ITEMS: NavItem[] = [
-  { label: "Inicio", href: "#hero" },
-  { label: "Sobre mí", href: "#about" },
-  { label: "Stack", href: "#tech" },
-  { label: "Proyectos", href: "#projects" },
-  { label: "Formación", href: "#education" },
-  { label: "Contacto", href: "#contact" },
-];
-
 export function Navigation() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Cierra el menú móvil si el usuario cambia a desktop
   useEffect(() => {
-    const onResize = () => {
-      if (window.innerWidth >= 768) setIsOpen(false);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Opcional: bloquear scroll cuando el menú está abierto
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
+  const navItems = [
+    { label: "Sobre mí", href: "#about" },
+    { label: "Stack", href: "#stack" },
+    { label: "Proyectos", href: "#projects" },
+    { label: "Formación", href: "#education" }
+  ];
 
-  const handleNavClick = () => setIsOpen(false);
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsMobileMenuOpen(false);
+  };
 
   return (
-    <header className="nav" role="banner">
-      <div className="nav__container">
-        <a className="nav__brand" href="#hero" onClick={handleNavClick}>
-          <span className="nav__brandMark" aria-hidden="true" />
-          <span className="nav__brandText">Mariana</span>
-        </a>
-
-        {/* Desktop */}
-        <nav className="nav__links" aria-label="Navegación principal">
-          {NAV_ITEMS.map((item) => (
-            <a key={item.href} href={item.href} className="nav__link">
-              {item.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="nav__actions">
-          <a className="nav__cta" href="#contact" onClick={handleNavClick}>
-            Contactar
-          </a>
-
-          {/* Mobile toggle */}
-          <button
-            type="button"
-            className="nav__toggle"
-            aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
-            aria-expanded={isOpen}
-            aria-controls="mobile-menu"
-            onClick={() => setIsOpen((v) => !v)}
-          >
-            {isOpen ? <X className="nav__toggleIcon" /> : <Menu className="nav__toggleIcon" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      <div
-        id="mobile-menu"
-        className={`nav__mobile ${isOpen ? "nav__mobile--open" : ""}`}
-        aria-hidden={!isOpen}
+    <>
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className={`nav ${isScrolled ? "nav--scrolled" : ""}`}
       >
-        <nav className="nav__mobilePanel" aria-label="Menú móvil">
-          {NAV_ITEMS.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="nav__mobileLink"
-              onClick={handleNavClick}
+        <div className="nav__container">
+          <div className="nav__content">
+
+            <button
+              onClick={scrollToTop}
+              className="nav__logo"
             >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-      </div>
-    </header>
+              MU
+            </button>
+
+            <div className="nav__links">
+              {navItems.map((item) => (
+                <a key={item.href} href={item.href} className="nav__link">
+                  {item.label}
+                </a>
+              ))}
+            </div>
+
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="nav__menuButton"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X /> : <Menu />}
+            </button>
+
+          </div>
+        </div>
+      </motion.nav>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ duration: 0.3 }}
+            className="nav__mobileMenu"
+          >
+            <div className="nav__mobileContent">
+              {navItems.map((item, index) => (
+                <motion.a
+                  key={item.href}
+                  href={item.href}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="nav__mobileLink"
+                >
+                  {item.label}
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="nav__overlay"
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 }

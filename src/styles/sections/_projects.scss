@@ -1,0 +1,250 @@
+@use "../abstracts/functions" as f;
+@use "../abstracts/mixins" as m;
+
+.projects {
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 1rem;
+  background: f.c(section);
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  &__orb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50rem;  // 800px
+    height: 50rem;
+    transform: translate(-50%, -50%);
+    border-radius: 9999px;
+    background: f.c(muted);
+    filter: blur(150px);
+  }
+
+  &__container {
+    @include m.container;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  &__title {
+    font-size: clamp(2.5rem, 4.5vw, 3.75rem); // ~text-5xl/6xl
+    color: f.c(highlight);
+    font-weight: 600;
+    margin: 0 0 1.5rem;
+  }
+
+  &__divider {
+    width: 6rem;
+    height: 0.375rem; // 6px
+    margin: 0 auto 1rem;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, f.c(primary), f.c(hover), f.c(primary));
+  }
+
+  &__subtitle {
+    margin: 0 auto;
+    max-width: 42rem;
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 400;
+  }
+
+  &__grid {
+    display: grid;
+    gap: 2rem;
+
+    @include m.respond(md) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include m.respond(lg) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  /* Placeholders para evitar repetición */
+  %card {
+    border-radius: 1rem; // 16px
+    overflow: hidden;
+    border: 1px solid rgba(157, 78, 221, 0.2);
+    background: linear-gradient(135deg, f.c(card), f.c(secondary));
+    transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+    will-change: transform;
+  }
+
+  %btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1rem;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    color: f.c(white);
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background-color 300ms ease, transform 200ms ease, border-color 300ms ease;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    @include m.focus-ring;
+  }
+
+  &__card {
+    @extend %card;
+
+    &:hover {
+      transform: scale(1.02);
+      border-color: f.c(hover);
+      box-shadow: 0 24px 50px rgba(157, 78, 221, 0.3);
+    }
+
+    &:hover .projects__img {
+      transform: scale(1.1);
+    }
+
+    &:hover .projects__cardTitle {
+      color: f.c(highlight);
+    }
+  }
+
+  &__media {
+    position: relative;
+    height: 12rem; // 48
+    background: f.c(section);
+    overflow: hidden;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 500ms ease;
+  }
+
+  &__imgOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(60, 9, 108, 0.85) 100%);
+    opacity: 0.6;
+  }
+
+  &__body {
+    padding: 1.5rem;
+  }
+
+  &__cardTitle {
+    margin: 0 0 0.75rem;
+    color: f.c(white);
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: color 250ms ease;
+  }
+
+  &__block {
+    margin-bottom: 1rem;
+  }
+
+  &__label {
+    margin: 0 0 0.5rem;
+    font-size: 0.875rem;
+    color: f.c(primary);
+    font-weight: 600;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 300;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    background: f.c(muted);
+    border: 1px solid rgba(157, 78, 221, 0.3);
+    color: f.c(highlight);
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  &__btn {
+    @extend %btn;
+  }
+
+  &__btnIcon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  &__btn--primary {
+    background: f.c(primary);
+
+    &:hover {
+      background: f.c(hover);
+    }
+  }
+
+  &__btn--secondary {
+    background: f.c(muted);
+    border: 1px solid rgba(157, 78, 221, 0.5);
+
+    &:hover {
+      background: f.c(primary);
+      border-color: rgba(199, 125, 255, 0.8);
+    }
+  }
+
+  &__bottom {
+    margin-top: 4rem;
+    text-align: center;
+  }
+
+  &__bottomIcon {
+    width: 3rem;
+    height: 3rem;
+    color: f.c(primary);
+    opacity: 0.5;
+    margin: 0 auto;
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .projects,
+  .projects * {
+    transition: none !important;
+  }
+}

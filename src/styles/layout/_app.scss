@@ -1,0 +1,21 @@
+@use "../abstracts/functions" as f;
+@use "../abstracts/mixins" as m;
+
+.app {
+  min-height: 100vh;
+  background: f.c(bg);
+  color: f.c(white);
+  font-family: "Kanit", sans-serif;
+}
+
+.container {
+  @include m.container;
+}
+
+.section {
+  padding: 6rem 1rem;
+
+  &--alt {
+    background: f.c(section);
+  }
+}

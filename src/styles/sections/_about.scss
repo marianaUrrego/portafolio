@@ -1,0 +1,135 @@
+@use "../abstracts/functions" as f;
+@use "../abstracts/mixins" as m;
+
+.about {
+  position: relative;
+  padding: 5rem 1rem;
+  background: f.c(section);
+
+  &__container {
+    @include m.container;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  &__title {
+    margin: 0 0 1rem;
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: f.c(highlight);
+
+    @include m.respond(md) {
+      font-size: 3rem;
+    }
+  }
+
+  &__divider {
+    width: 5rem;
+    height: 0.25rem;
+    margin: 0 auto;
+    border-radius: f.r(full);
+    background: linear-gradient(90deg, f.c(primary), f.c(hover));
+  }
+
+  &__content {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+
+    @include m.respond(md) {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+  }
+
+  &__headline {
+    margin: 0 0 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: f.c(white);
+
+    @include m.respond(md) {
+      font-size: 1.875rem;
+    }
+  }
+
+  &__paragraphs {
+    display: grid;
+    gap: 1rem;
+    line-height: 1.8;
+    color: rgba(f.c(white), 0.78);
+  }
+
+  &__paragraph {
+    margin: 0;
+  }
+
+  &__highlight {
+    font-weight: 600;
+
+    &--hover {
+      color: f.c(hover);
+    }
+
+    &--primary {
+      color: f.c(primary);
+    }
+  }
+
+  &__skills {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  &__skillCard {
+    padding: 1.5rem;
+    border-radius: f.r(lg);
+    border: 1px solid rgba(f.c(primary), 0.2);
+    background: linear-gradient(135deg, f.c(card), f.c(secondary));
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+      border-color: rgba(f.c(primary), 0.5);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      transform: translateY(-2px);
+    }
+  }
+
+  &__skillRow {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  &__skillIconWrap {
+    flex: 0 0 auto;
+    padding: 0.75rem;
+    border-radius: f.r(md);
+    background: f.c(muted);
+    color: f.c(highlight);
+  }
+
+  &__skillIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: block;
+  }
+
+  &__skillTitle {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: f.c(white);
+  }
+
+  &__skillDescription {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: rgba(f.c(white), 0.78);
+  }
+}

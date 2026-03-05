@@ -1,0 +1,47 @@
+@use "sass:map";
+@use "./tokens" as t;
+@use "./functions" as f;
+
+@mixin respond($breakpoint) {
+  $value: map.get(t.$breakpoints, $breakpoint);
+
+  @if $value == null {
+    @error "Breakpoint '#{$breakpoint}' no existe en $breakpoints.";
+  }
+
+  @media (min-width: $value) {
+    @content;
+  }
+}
+
+@mixin container {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid f.c(hover);
+    outline-offset: 3px;
+  }
+}
+
+@mixin gradient-text {
+  background: linear-gradient(
+    90deg,
+    f.c(hover),
+    f.c(primary),
+    f.c(highlight)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@mixin glass {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(f.c(bg), 0.7);
+}

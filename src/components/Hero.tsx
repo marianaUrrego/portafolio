@@ -15,7 +15,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="hero__conten"
+          className="hero__content"
         >
           {/* Nombre */}
           <motion.h1
@@ -69,12 +69,6 @@ export function Hero() {
             >
               Ver proyectos
               <ArrowRight className="hero__btnIcon" />
-            </a>
-            <a
-              href="#contact"
-              className="hero__btn hero__btn--secondary"
-            >
-              Contactar
             </a>
           </motion.div>
 

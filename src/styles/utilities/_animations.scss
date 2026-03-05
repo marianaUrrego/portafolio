@@ -1,0 +1,55 @@
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Helpers */
+.u-fade-in { animation: fadeIn 0.6s ease both; }
+.u-float { animation: float 6s ease-in-out infinite; }
+.u-pulse-glow { animation: pulse-glow 2.4s ease-in-out infinite; }
+
+.u-spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top-color: rgba(255,255,255,0.85);
+  animation: spin 0.8s linear infinite;
+}
+
+.u-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.08)
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease infinite;
+}

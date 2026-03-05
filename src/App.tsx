@@ -6,14 +6,12 @@ import {
   TechStack,
   Projects,
   Education,
-  ScrollToTop,
 } from "./components";
 
 export default function App() {
   return (
     <div className="app">
       <Navigation />
-      <ScrollToTop />
       
       <main>
         <Hero />

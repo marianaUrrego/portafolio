@@ -1,64 +1,85 @@
 import { motion } from "motion/react";
 import { Code2, Users, TrendingUp } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+type SoftSkill = {
+  Icon: LucideIcon;
+  title: string;
+  description: string;
+};
 
 export function About() {
-  const softSkills = [
+  const softSkills: SoftSkill[] = [
     {
-      icon: <Code2 className="w-6 h-6" />,
+      Icon: Code2,
       title: "Resolución de problemas",
-      description: "Me gusta analizar los problemas con calma y buscar soluciones claras y eficientes cuando aparecen retos"
+      description:
+        "Me gusta analizar los problemas con calma y buscar soluciones claras y eficientes cuando aparecen retos",
     },
     {
-      icon: <Users className="w-6 h-6" />,
+      Icon: Users,
       title: "Trabajo en equipo",
-      description: "Disfruto trabajar en equipo, compartir ideas y colaborar para encontrar mejores soluciones en los proyectos"
+      description:
+        "Disfruto trabajar en equipo, compartir ideas y colaborar para encontrar mejores soluciones en los proyectos",
     },
     {
-      icon: <TrendingUp className="w-6 h-6" />,
+      Icon: TrendingUp,
       title: "Aprendizaje continuo",
-      description: "Siempre estoy aprendiendo nuevas tecnologías y buscando mejorar mis habilidades como desarrolladora"
-    }
+      description:
+        "Siempre estoy aprendiendo nuevas tecnologías y buscando mejorar mis habilidades como desarrolladora",
+    },
   ];
 
   return (
-    <section id="about" className="py-20 px-4 bg-[#240046]">
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="about">
+      <div className="about__container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="about__header"
         >
-          <h2 className="text-4xl md:text-5xl mb-4 text-[#E0AAFF]" style={{ fontWeight: 600 }}>
-            Sobre mí
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-[#9D4EDD] to-[#C77DFF] mx-auto rounded-full" />
+          <h2 className="about__title">Sobre mí</h2>
+          <div className="about__divider" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <div className="about__content">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
+            className="about__textBlock"
           >
-            <h3 className="text-2xl md:text-3xl mb-6 text-white" style={{ fontWeight: 600 }}>
+            <h3 className="about__headline">
               Backend Developer con visión Full Stack
             </h3>
-            <div className="space-y-4 text-gray-300 leading-relaxed">
-              <p>
-                Mi interés principal está en el <span className="text-[#C77DFF]" style={{ fontWeight: 600 }}>desarrollo backend</span>, 
-                donde he trabajado en la construcción de APIs REST utilizando Python y en la gestión de bases de datos. 
-                Me encuentro fortaleciendo constantemente mis habilidades en diseño de servicios, arquitectura de aplicaciones y desarrollo en la nube.
+
+            <div className="about__paragraphs">
+              <p className="about__paragraph">
+                Mi interés principal está en el{" "}
+                <span className="about__highlight about__highlight--hover">
+                  desarrollo backend
+                </span>
+                , donde he trabajado en la construcción de APIs REST utilizando Python y
+                en la gestión de bases de datos. Me encuentro fortaleciendo constantemente
+                mis habilidades en diseño de servicios, arquitectura de aplicaciones y
+                desarrollo en la nube.
               </p>
-              <p>
-                También tengo experiencia desarrollando interfaces con <span className="text-[#9D4EDD]" style={{ fontWeight: 600 }}>React, TypeScript y JavaScript</span>, 
-                para crear interfaces de usuario intuitivas y responsivas. Esta visión 
-                full stack me ayuda a entender cómo se conectan las distintas partes de una aplicación.
+
+              <p className="about__paragraph">
+                También tengo experiencia desarrollando interfaces con{" "}
+                <span className="about__highlight about__highlight--primary">
+                  React, TypeScript y JavaScript
+                </span>
+                , para crear interfaces de usuario intuitivas y responsivas. Esta visión
+                full stack me ayuda a entender cómo se conectan las distintas partes de
+                una aplicación.
               </p>
-              <p>
-                Me gusta aprender nuevas tecnologías, perfeccionar las que ya conozco y 
+
+              <p className="about__paragraph">
+                Me gusta aprender nuevas tecnologías, perfeccionar las que ya conozco y
                 participar en proyectos donde pueda seguir creciendo como desarrolladora.
               </p>
             </div>
@@ -69,28 +90,25 @@ export function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="space-y-6"
+            className="about__skills"
           >
             {softSkills.map((skill, index) => (
               <motion.div
-                key={index}
+                key={skill.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.6 }}
-                className="bg-gradient-to-br from-[#3C096C] to-[#5A189A] p-6 rounded-xl border border-[#9D4EDD]/20 hover:border-[#9D4EDD]/50 transition-all duration-300 hover:shadow-lg hover:shadow-[#9D4EDD]/20"
+                className="about__skillCard"
               >
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-[#7B2CBF] rounded-lg text-[#E0AAFF]">
-                    {skill.icon}
+                <div className="about__skillRow">
+                  <div className="about__skillIconWrap">
+                    <skill.Icon className="about__skillIcon" aria-hidden="true" />
                   </div>
-                  <div>
-                    <h4 className="text-xl text-white mb-2" style={{ fontWeight: 600 }}>
-                      {skill.title}
-                    </h4>
-                    <p className="text-gray-300 text-sm leading-relaxed" style={{ fontWeight: 300 }}>
-                      {skill.description}
-                    </p>
+
+                  <div className="about__skillBody">
+                    <h4 className="about__skillTitle">{skill.title}</h4>
+                    <p className="about__skillDescription">{skill.description}</p>
                   </div>
                 </div>
               </motion.div>

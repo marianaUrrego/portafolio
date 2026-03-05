@@ -3,78 +3,78 @@ import { GraduationCap, Calendar, MapPin } from "lucide-react";
 
 export function Education() {
   return (
-    <section id="education" className="py-20 px-4 relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#5A189A] rounded-full blur-[100px]" />
+    <section id="education" className="education">
+      {/* Background blob */}
+      <div className="education__bg" aria-hidden="true">
+        <div className="education__blob" />
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="education__container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="education__header"
         >
-          <h2 className="text-4xl md:text-5xl mb-4 text-[#E0AAFF]" style={{ fontWeight: 600 }}>
-            Formación Académica
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-[#9D4EDD] to-[#C77DFF] mx-auto rounded-full" />
+          <h2 className="education__title">Formación Académica</h2>
+          <div className="education__divider" />
         </motion.div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="education__content">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="bg-gradient-to-br from-[#3C096C] to-[#5A189A] p-8 md:p-10 rounded-2xl border border-[#9D4EDD]/30 hover:border-[#C77DFF] transition-all duration-300 hover:shadow-2xl hover:shadow-[#9D4EDD]/30"
+            className="education__card"
           >
-            <div className="flex flex-col md:flex-row md:items-start gap-6">
+            <div className="education__cardGrid">
               {/* Icon */}
-              <div className="flex-shrink-0">
-                <div className="w-16 h-16 bg-[#7B2CBF] rounded-xl flex items-center justify-center text-[#E0AAFF] group-hover:bg-[#9D4EDD] transition-colors">
-                  <GraduationCap className="w-8 h-8" />
+              <div className="education__iconCol">
+                <div className="education__iconWrap" aria-hidden="true">
+                  <GraduationCap className="education__icon" />
                 </div>
               </div>
 
               {/* Content */}
-              <div className="flex-1">
-                <h3 className="text-2xl md:text-3xl text-white mb-3" style={{ fontWeight: 600 }}>
-                  Ingeniería de Sistemas e Informática
-                </h3>
-                
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-2 text-[#C77DFF]">
-                    <Calendar className="w-5 h-5" />
-                    <p style={{ fontWeight: 500 }}>Octavo semestre • 2022 - 2026 (Expected)</p>
+              <div className="education__body">
+                <h3 className="education__degree">Ingeniería de Sistemas e Informática</h3>
+
+                <div className="education__meta">
+                  <div className="education__metaRow">
+                    <Calendar className="education__metaIcon" aria-hidden="true" />
+                    <p className="education__metaText">
+                      Octavo semestre • 2022 - 2026 (Expected)
+                    </p>
                   </div>
-                  <div className="flex items-center gap-2 text-[#C77DFF]">
-                    <MapPin className="w-5 h-5" />
-                    <p style={{ fontWeight: 500 }}>Universidad Pontificia Bolivariana sede Medellín</p>
+
+                  <div className="education__metaRow">
+                    <MapPin className="education__metaIcon" aria-hidden="true" />
+                    <p className="education__metaText">
+                      Universidad Pontificia Bolivariana sede Medellín
+                    </p>
                   </div>
                 </div>
 
-                <div className="bg-[#240046]/50 p-6 rounded-xl border border-[#7B2CBF]/30">
-                  <h4 className="text-lg text-[#E0AAFF] mb-3" style={{ fontWeight: 600 }}>
-                    Áreas de especialización:
-                  </h4>
-                  <ul className="space-y-2 text-gray-300">
-                    <li className="flex items-start gap-2" style={{ fontWeight: 300 }}>
-                      <span className="text-[#9D4EDD] mt-1">•</span>
+                <div className="education__specialties">
+                  <h4 className="education__specialtiesTitle">Áreas de especialización:</h4>
+
+                  <ul className="education__list">
+                    <li className="education__listItem">
+                      <span className="education__bullet" aria-hidden="true">•</span>
                       <span>Desarrollo Backend con Python</span>
                     </li>
-                    <li className="flex items-start gap-2" style={{ fontWeight: 300 }}>
-                      <span className="text-[#9D4EDD] mt-1">•</span>
+                    <li className="education__listItem">
+                      <span className="education__bullet" aria-hidden="true">•</span>
                       <span>Diseño y consumo de APIs REST</span>
                     </li>
-                    <li className="flex items-start gap-2" style={{ fontWeight: 300 }}>
-                      <span className="text-[#9D4EDD] mt-1">•</span>
+                    <li className="education__listItem">
+                      <span className="education__bullet" aria-hidden="true">•</span>
                       <span>Modelado y gestión de bases de datos</span>
                     </li>
-                    <li className="flex items-start gap-2" style={{ fontWeight: 300 }}>
-                      <span className="text-[#9D4EDD] mt-1">•</span>
+                    <li className="education__listItem">
+                      <span className="education__bullet" aria-hidden="true">•</span>
                       <span>Desarrollo web con React</span>
                     </li>
                   </ul>
@@ -89,11 +89,13 @@ export function Education() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="mt-8 text-center"
+            className="education__note"
           >
-            <p className="text-gray-300 text-lg" style={{ fontWeight: 400 }}>
-              Buscando oportunidades de <span className="text-[#C77DFF]" style={{ fontWeight: 600 }}>prácticas profesionales</span> y 
-              roles <span className="text-[#C77DFF]" style={{ fontWeight: 600 }}>junior</span> para aplicar y expandir mis conocimientos
+            <p className="education__noteText">
+              Buscando oportunidades de{" "}
+              <span className="education__noteHighlight">prácticas profesionales</span> y
+              roles{" "}
+              <span className="education__noteHighlight">junior</span> para aplicar y expandir mis conocimientos
             </p>
           </motion.div>
         </div>
