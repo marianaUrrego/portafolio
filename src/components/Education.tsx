@@ -45,7 +45,7 @@ export function Education() {
                   <div className="education__metaRow">
                     <Calendar className="education__metaIcon" aria-hidden="true" />
                     <p className="education__metaText">
-                      Octavo semestre • 2022 - 2026 (Expected)
+                      Octavo semestre • 2022 - 2027 (Expected)
                     </p>
                   </div>
 

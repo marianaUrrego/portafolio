@@ -60,6 +60,7 @@
     display: grid;
     gap: 1rem;
     line-height: 1.8;
+    font-size: 1.125rem;
     color: rgba(f.c(white), 0.78);
   }
 
@@ -127,7 +128,7 @@
 
   &__skillDescription {
     margin: 0;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 300;
     line-height: 1.6;
     color: rgba(f.c(white), 0.78);
