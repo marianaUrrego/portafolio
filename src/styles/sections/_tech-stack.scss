@@ -5,24 +5,33 @@
   position: relative;
   padding: 5rem 1rem;
   overflow: hidden;
-  background: f.c(section);
+  background: f.c(bg);
 
   &__bg {
     position: absolute;
     inset: 0;
-    opacity: 0.2;
+    opacity: 0.3;
     pointer-events: none;
   }
 
-  &__blob {
+  &__orb {
     position: absolute;
-    top: 0;
-    right: 33%;
     width: 24rem;
     height: 24rem;
-    border-radius: f.r(full);
-    background: f.c(secondary);
-    filter: blur(100px);
+    border-radius: 9999px;
+    filter: blur(120px);
+
+    &--one {
+      top: 25%;
+      left: 25%;
+      background: f.c(secondary);
+    }
+
+    &--two {
+      bottom: 25%;
+      right: 25%;
+      background: f.c(muted);
+    }
   }
 
   &__container {
@@ -126,10 +135,6 @@
       max-width: 56rem;
       margin: 0 auto;
     }
-  }
-
-  &__item {
-    // wrapper para animación
   }
 
   &__card {

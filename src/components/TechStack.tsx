@@ -44,9 +44,10 @@ export function TechStack() {
 
   return (
     <section id="stack" className="tech-stack">
-      {/* Background blob */}
+      {/* Background effect */}
       <div className="tech-stack__bg" aria-hidden="true">
-        <div className="tech-stack__blob" />
+        <div className="tech-stack__orb tech-stack__orb--one" />
+        <div className="tech-stack__orb tech-stack__orb--two" />
       </div>
 
       <div className="tech-stack__container">
